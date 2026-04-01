@@ -1,10 +1,9 @@
 {
-  "name": "portfolio-website",
-  "type": "module",
+  "name": "duchiru-portfolio-website",
+  "description": "Nguyen The Viet's portfolio website built with Astro",
   "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "author": "Nguyen The Viet <https://github.com/duchiru>",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
