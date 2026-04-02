@@ -3,14 +3,30 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #f8f9fa;
-  --color-foreground: #212529;
-  --color-muted: #6c757d;
-
-  --color-primary: #4a90e2;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  
+  --color-primary: var(--primary);
 
   --font-sans: "Be Vietnam Pro", sans-serif;
   --font-display: "Momo Trust Display", cursive;
+}
+
+.light {
+  --background: #f8f9fa;
+  --foreground: #212529;
+  --muted: #6c757d;
+
+  --primary: #4a90e2;
+}
+
+.dark {
+  --background: #212529;
+  --foreground: #E0E0E0;
+  --muted: #88929B;
+
+  --primary: #4a90e2;
 }
 
 @layer base {
