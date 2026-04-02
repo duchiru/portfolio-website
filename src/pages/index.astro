@@ -1,9 +1,7 @@
 ---
-import Counter from "../components/counter";
 import RootLayout from "../layouts/RootLayout.astro";
 ---
 
 <RootLayout>
-  <Counter client:load />
-  {Array.from({ length: 100 }, (_, i) => <p>This is line {i + 1}</p>)}
+  <h1>Home Page</h1>
 </RootLayout>
