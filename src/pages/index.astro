@@ -1,10 +1,16 @@
 ---
+import {
+  CircleCheckIcon,
+  CircleDotIcon,
+  SchoolIcon,
+  UniversityIcon,
+} from "@lucide/astro";
 import RootLayout from "../layouts/RootLayout.astro";
 ---
 
 <RootLayout>
-  <main class="mt-14 mx-auto max-w-xl px-4 py-6 space-y-4">
-    <section>
+  <main class="mt-14 mx-auto max-w-xl px-4 py-6 space-y-8">
+    <section id="about-me">
       <h3 class="text-lg font-display">About Me</h3>
       <p class="indent-4 text-justify">
         I am Viet, a Vietnamese passionate developer. I have a strong interest
@@ -14,6 +20,59 @@ import RootLayout from "../layouts/RootLayout.astro";
         undergraduating at the University of Engineering and Technology, Vietnam
         National University (UET-VNU), majoring in Artificial Intelligence.
       </p>
+    </section>
+
+    <section id="career-milestones">
+      <h3 class="text-lg font-display">Career Milestones</h3>
+      <div class="mt-2 pl-4 space-y-1">
+        <div class="flex flex-row gap-1 text-sm font-display">
+          <CircleDotIcon class="size-5" />
+          2007
+        </div>
+        <div class="pl-2.5 flex flex-row gap-4.5">
+          <div class="w-px bg-gray-500"></div>
+          <p class="text-sm">Born in Bac Ninh, Vietnam.</p>
+        </div>
+        <div class="flex flex-row gap-1 text-sm font-display">
+          <SchoolIcon class="size-5" />
+          2022
+        </div>
+        <div class="pl-2.5 flex flex-row gap-4.5">
+          <div class="w-px bg-gray-500"></div>
+          <div>
+            <p class="text-sm">Bac Ninh High School for the Gifted</p>
+            <ul class="indent-4 list-disc list-inside text-sm">
+              <li>Studied IT Major.</li>
+              <li>
+                <span class="font-bold">Third Prize</span>, Vietnam National
+                Olympiad in Informatics (VOI) 2024.
+              </li>
+              <li>Graduated with distinction.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex flex-row gap-1 text-sm font-display">
+          <UniversityIcon class="size-5" />
+          2025
+        </div>
+        <div class="pl-2.5 flex flex-row gap-4.5">
+          <div class="w-px bg-gray-500"></div>
+          <div>
+            <p class="text-sm">
+              University of Engineering and Technology - Vietnam National
+              University
+            </p>
+            <ul class="indent-4 list-disc list-inside text-sm">
+              <li>Bachelor of Science in Artificial Intelligence.</li>
+              <li>Undergraduating.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex flex-row gap-1 text-sm font-display">
+          <CircleCheckIcon class="size-5" />
+          Present
+        </div>
+      </div>
     </section>
   </main>
 </RootLayout>
