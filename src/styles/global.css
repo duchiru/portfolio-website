@@ -6,7 +6,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
-  
+
   --color-primary: var(--primary);
 
   --font-sans: "Be Vietnam Pro", sans-serif;
@@ -23,8 +23,8 @@
 
 .dark {
   --background: #212529;
-  --foreground: #E0E0E0;
-  --muted: #88929B;
+  --foreground: #e0e0e0;
+  --muted: #88929b;
 
   --primary: #4a90e2;
 }
