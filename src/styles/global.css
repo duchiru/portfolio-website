@@ -3,6 +3,8 @@
 @theme inline {
   --color-background: #F8F9FA;
   --color-foreground: #212529;
+
+  --color-primary: #4A90E2;
 }
 
 @layer base {

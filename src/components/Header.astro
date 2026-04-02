@@ -1,5 +1,7 @@
 ---
 import Avatar from "./Avatar.astro";
+
+const pathname = Astro.url.pathname;
 ---
 
 <header
@@ -16,7 +18,8 @@ import Avatar from "./Avatar.astro";
       </a>
     </div>
     <nav class="flex flex-row items-center justify-center gap-3">
-      Links goes here
+      <a href="/projects" class={`px-2.5 py-1 rounded-sm font-medium ${pathname === "/projects" ? "bg-primary text-foreground" : "hover:underline"} select-none`}>Projects</a>
+      <a href="/blogs" class={`px-2.5 py-1 rounded-sm font-medium ${pathname === "/blogs" ? "bg-primary text-foreground" : "hover:underline"} select-none`}>Blogs</a>
     </nav>
     <div class="flex flex-row items-center justify-end">
       Dark/Light mode toggle goes here
