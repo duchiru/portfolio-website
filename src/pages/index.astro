@@ -5,4 +5,5 @@ import RootLayout from "../layouts/RootLayout.astro";
 
 <RootLayout>
   <Counter client:load />
+  {Array.from({ length: 100 }, (_, i) => <p>This is line {i + 1}</p>)}
 </RootLayout>
