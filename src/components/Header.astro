@@ -18,8 +18,8 @@ const pathname = Astro.url.pathname;
       </a>
     </div>
     <nav class="flex flex-row items-center justify-center gap-3">
-      <a href="/projects" class={`px-2.5 py-1 rounded-sm font-medium ${pathname === "/projects" ? "bg-primary text-foreground" : "hover:underline"} select-none`}>Projects</a>
-      <a href="/blogs" class={`px-2.5 py-1 rounded-sm font-medium ${pathname === "/blogs" ? "bg-primary text-foreground" : "hover:underline"} select-none`}>Blogs</a>
+      <a href="/projects" class={`px-3 py-1.5 rounded-sm text-sm font-medium ${pathname === "/projects" ? "bg-primary text-foreground" : "hover:underline"} select-none`}>Projects</a>
+      <a href="/blogs" class={`px-3 py-1.5 rounded-sm text-sm font-medium ${pathname === "/blogs" ? "bg-primary text-foreground" : "hover:underline"} select-none`}>Blogs</a>
     </nav>
     <div class="flex flex-row items-center justify-end">
       Dark/Light mode toggle goes here
