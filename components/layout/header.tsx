@@ -20,9 +20,7 @@ function HeaderLink(props: React.ComponentProps<typeof Link>) {
     <Link
       className="px-3 py-1.5 text-sm font-medium tracking-wide rounded-sm hover:bg-gray-500/10 transition-colors duration-200"
       {...props}
-    >
-      {props.children}
-    </Link>
+    />
   );
 }
 
