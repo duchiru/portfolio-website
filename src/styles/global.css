@@ -2,6 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
 @import "tailwindcss";
 
+:root {
+  scroll-behavior: smooth;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
