@@ -32,6 +32,10 @@ main li {
   @apply text-base leading-relaxed;
 }
 
+main th {
+  @apply p-1;
+}
+
 main td {
   @apply p-1;
 }
