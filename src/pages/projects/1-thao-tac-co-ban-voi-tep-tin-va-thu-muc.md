@@ -76,4 +76,4 @@ Sử dụng tổ hợp phím **Shift + Delete** để xóa tệp mà không qua 
 ## 12. Khôi phục từ Thùng rác
 Truy cập **Recycle Bin** trên màn hình, nhấp chuột phải vào tệp tin đã xóa và thực hiện lệnh **Restore** để khôi phục tệp về vị trí ban đầu.
 
-![xoa vinh vien](/project-1/18.png)
+![khoi phuc tu thung rac](/project-1/18.png)
