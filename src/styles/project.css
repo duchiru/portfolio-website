@@ -19,3 +19,19 @@ main p {
 main img {
   @apply my-2;
 }
+
+main ul {
+  @apply list-disc pl-6;
+}
+
+main ol {
+  @apply list-decimal pl-6;
+}
+
+main li {
+  @apply text-base leading-relaxed;
+}
+
+main td {
+  @apply p-1;
+}
