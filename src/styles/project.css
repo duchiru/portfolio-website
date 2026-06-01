@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+* {
+  @apply font-sans;
+}
+
+h1 {
+  @apply text-3xl font-bold text-center;
+}
+
+h2 {
+  @apply text-2xl font-semibold mt-5 mb-2;
+}
+
+p {
+  @apply text-base my-2;
+}
+
+img {
+  @apply my-2;
+}
