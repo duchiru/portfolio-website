@@ -12,6 +12,14 @@ main h2 {
   @apply text-2xl font-semibold mt-5 mb-2;
 }
 
+main h3 {
+  @apply text-xl font-semibold mt-5 mb-2;
+}
+
+main h4 {
+  @apply text-lg font-semibold mt-5 mb-2;
+}
+
 main p {
   @apply text-base my-2;
 }
