@@ -1,49 +1,49 @@
 @import "tailwindcss";
 
-main * {
+.content * {
   @apply font-sans;
 }
 
-main h1 {
+.content h1 {
   @apply text-3xl font-bold text-center;
 }
 
-main h2 {
+.content h2 {
   @apply text-2xl font-semibold mt-5 mb-2;
 }
 
-main h3 {
+.content h3 {
   @apply text-xl font-semibold mt-5 mb-2;
 }
 
-main h4 {
+.content h4 {
   @apply text-lg font-semibold mt-5 mb-2;
 }
 
-main p {
+.content p {
   @apply text-base my-2;
 }
 
-main img {
+.content img {
   @apply my-2;
 }
 
-main ul {
+.content ul {
   @apply list-disc pl-6;
 }
 
-main ol {
+.content ol {
   @apply list-decimal pl-6;
 }
 
-main li {
+.content li {
   @apply text-base leading-relaxed;
 }
 
-main th {
+.content th {
   @apply p-1;
 }
 
-main td {
+.content td {
   @apply p-1;
 }
