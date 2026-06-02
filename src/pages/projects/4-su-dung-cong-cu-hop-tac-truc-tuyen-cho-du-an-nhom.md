@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/ProjectLayout.astro
-title: Ứng dụng công cụ hợp tác trực tuyến trong quản lý dự án nhóm
+title: Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm
 ---
 
 # ỨNG DỤNG CÔNG CỤ HỢP TÁC TRỰC TUYẾN TRONG QUẢN LÝ DỰ ÁN NHÓM

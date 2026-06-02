@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/ProjectLayout.astro
-title: Sáng tạo Không gian Truyền thông số - Ứng dụng Hệ sinh thái AI Tạo sinh
+title: Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung
 ---
 
-# BÁO CÁO DỰ ÁN SÁNG TẠO KHÔNG GIAN TRUYỀN THÔNG SỐ
+<h1 class="text-balance">BÁO CÁO DỰ ÁN SÁNG TẠO KHÔNG GIAN TRUYỀN THÔNG SỐ</h1>
 
 **Chiến dịch:** "Xanh Hóa Đô Thị"
 

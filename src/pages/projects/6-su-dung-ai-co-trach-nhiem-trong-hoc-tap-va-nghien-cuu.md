@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/ProjectLayout.astro
-title: Sử dụng trí tuệ nhân tạo có trách nhiệm và đạo đức trong học tập và nghiên cứu
+title: Sử dụng AI có trách nhiệm trong học tập và nghiên cứu
 ---
 
 # BÁO CÁO BÀI TẬP: SỬ DỤNG TRÍ TUỆ NHÂN TẠO CÓ TRÁCH NHIỆM VÀ ĐẠO ĐỨC TRONG HỌC TẬP VÀ NGHIÊN CỨU
