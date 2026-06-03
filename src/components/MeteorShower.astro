@@ -1,0 +1,202 @@
+<canvas id="meteor-canvas" class="fixed inset-0 pointer-events-none -z-10 block"
+></canvas>
+
+<script>
+  interface Star {
+    x: number;
+    y: number;
+    size: number;
+    alpha: number;
+    twinkleSpeed: number;
+    phase: number;
+  }
+
+  interface Meteor {
+    x: number;
+    y: number;
+    length: number;
+    speed: number;
+    opacity: number;
+    angle: number;
+    width: number;
+  }
+
+  function initMeteorShower() {
+    const canvas = document.getElementById(
+      "meteor-canvas",
+    ) as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d")!;
+    if (!ctx) return;
+
+    // Cancel any existing animation frame to prevent loops from piling up
+    if ((canvas as any)._animationFrameId) {
+      cancelAnimationFrame((canvas as any)._animationFrameId);
+    }
+
+    // Set canvas sizes
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Star configuration
+    const stars: Star[] = [];
+    // Number of stars scales with screen area (approx 1 star per 20000 pixels, max 80 stars)
+    const starCount = Math.min(
+      Math.floor((window.innerWidth * window.innerHeight) / 20000),
+      100,
+    );
+
+    for (let i = 0; i < starCount; i++) {
+      stars.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: Math.random() * 1.2 + 0.4,
+        alpha: Math.random(),
+        twinkleSpeed: 0.005 + Math.random() * 0.015,
+        phase: Math.random() * Math.PI * 2,
+      });
+    }
+
+    // Meteor configuration
+    const meteors: Meteor[] = [];
+    const maxMeteors = 6; // Allow more concurrent meteors
+
+    function createMeteor(): Meteor {
+      const angle = Math.PI * 0.75 + (Math.random() - 0.5) * 0.15; // ~135 degrees (falling top-right to bottom-left)
+
+      // Start position off-screen top or right
+      let x = 0;
+      let y = 0;
+      if (Math.random() > 0.4) {
+        x = Math.random() * (window.innerWidth + 200);
+        y = -50;
+      } else {
+        x = window.innerWidth + 50;
+        y = Math.random() * (window.innerHeight / 2);
+      }
+
+      return {
+        x,
+        y,
+        length: Math.random() * 80 + 70, // Longer tail (70px to 150px)
+        speed: Math.random() * 4 + 4.5, // Faster, clear speed (4.5px to 8.5px/frame)
+        opacity: Math.random() * 0.4 + 0.35, // Bright, clear opacity (35% to 75%)
+        angle,
+        width: Math.random() * 1.0 + 0.8, // Slightly thicker for visibility
+      };
+    }
+
+    // Schedule the first meteor spawn (very soon)
+    let nextMeteorTime = Date.now() + 500;
+
+    function animate() {
+      // Clear with transparency
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const isDark = document.documentElement.classList.contains("dark");
+      // Scale overall opacity based on theme. Make it visible but softer in light mode.
+      const themeScale = isDark ? 1.0 : 0.25;
+
+      if (themeScale > 0) {
+        // 1. Draw Twinkling Stars
+        stars.forEach((star) => {
+          star.phase += star.twinkleSpeed;
+          const alpha = ((Math.sin(star.phase) + 1) / 2) * 0.35 * themeScale; // Max opacity 0.35
+
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fillStyle = isDark
+            ? `rgba(255, 255, 255, ${alpha})`
+            : `rgba(74, 144, 226, ${alpha * 0.5})`;
+          ctx.fill();
+        });
+
+        // 2. Spawn and Update Meteors
+        const now = Date.now();
+        if (meteors.length < maxMeteors && now > nextMeteorTime) {
+          meteors.push(createMeteor());
+          nextMeteorTime = now + 800 + Math.random() * 200; // spawn frequently (every 0.8 - 1 seconds)
+        }
+
+        for (let i = meteors.length - 1; i >= 0; i--) {
+          const m = meteors[i];
+
+          const dx = Math.cos(m.angle) * m.speed;
+          const dy = Math.sin(m.angle) * m.speed;
+
+          m.x += dx;
+          m.y += dy;
+
+          const endX = m.x - Math.cos(m.angle) * m.length;
+          const endY = m.y - Math.sin(m.angle) * m.length;
+
+          // Draw meteor with a linear gradient tail
+          const grad = ctx.createLinearGradient(m.x, m.y, endX, endY);
+
+          const meteorColor = isDark
+            ? "rgba(147, 197, 253,"
+            : "rgba(96, 165, 250,"; // blueish tail
+          const headColor = isDark
+            ? "rgba(255, 255, 255,"
+            : "rgba(37, 99, 235,"; // white/bright head
+
+          grad.addColorStop(0, `${headColor}${m.opacity * themeScale})`);
+          grad.addColorStop(
+            0.15,
+            `${meteorColor}${m.opacity * 0.8 * themeScale})`,
+          );
+          grad.addColorStop(1, `${meteorColor}0)`);
+
+          ctx.beginPath();
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = m.width;
+          ctx.lineCap = "round";
+          ctx.moveTo(m.x, m.y);
+          ctx.lineTo(endX, endY);
+          ctx.stroke();
+
+          // Remove off-screen meteors
+          if (
+            m.y > canvas.height + 150 ||
+            m.x < -150 ||
+            m.x > canvas.width + 150
+          ) {
+            meteors.splice(i, 1);
+          }
+        }
+      }
+
+      (canvas as any)._animationFrameId = requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    const cleanup = () => {
+      window.removeEventListener("resize", resizeCanvas);
+      if ((canvas as any)._animationFrameId) {
+        cancelAnimationFrame((canvas as any)._animationFrameId);
+      }
+    };
+
+    // Ensure cleanup of handlers on swap to prevent memory leak
+    document.addEventListener("astro:before-swap", cleanup, { once: true });
+  }
+
+  // Bind to Astro transition and initial load events
+  document.addEventListener("astro:page-load", initMeteorShower);
+
+  // Fallback check
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    initMeteorShower();
+  } else {
+    window.addEventListener("DOMContentLoaded", initMeteorShower);
+  }
+</script>
