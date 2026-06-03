@@ -14,9 +14,29 @@ import Footer from "../components/Footer.astro";
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
     <title>Nguyễn Thế Việt | Portfolio</title>
 
+    <!-- Apply theme before first paint to avoid flash -->
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const theme = saved === "dark" ? "dark" : "light";
+        document.documentElement.classList.add(theme);
+      })();
+
+      // Preserve theme across Astro View Transition page swaps.
+      // astro:before-swap fires before the new document replaces the current DOM,
+      // giving us a chance to copy the active theme class onto the incoming html element.
+      document.addEventListener("astro:before-swap", function (event) {
+        const theme = document.documentElement.classList.contains("dark")
+          ? "dark"
+          : "light";
+        event.newDocument.documentElement.classList.remove("light", "dark");
+        event.newDocument.documentElement.classList.add(theme);
+      });
+    </script>
+
     <ClientRouter />
   </head>
-  <body class="light">
+  <body>
     <Header />
     <slot />
     <Footer />

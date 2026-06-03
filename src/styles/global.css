@@ -17,7 +17,7 @@
   --font-display: "Momo Trust Display", cursive;
 }
 
-.light {
+html.light {
   --background: #f8f9fa;
   --foreground: #212529;
   --muted: #6c757d;
@@ -25,7 +25,7 @@
   --primary: #4a90e2;
 }
 
-.dark {
+html.dark {
   --background: #212529;
   --foreground: #e0e0e0;
   --muted: #88929b;

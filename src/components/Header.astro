@@ -43,13 +43,94 @@ import { MoonIcon, SunIcon } from "@lucide/astro";
       >
     </nav>
     <div class="flex flex-row items-center justify-end">
-      <button class="rounded-lg p-2.5 bg-purple-500 cursor-pointer">
-        <MoonIcon class="size-5 text-white fill-white" />
-      </button>
-
-      <button class="rounded-lg p-2.5 bg-orange-400 cursor-pointer">
-        <SunIcon class="size-5 text-white fill-white" />
+      <button
+        id="theme-toggle"
+        aria-label="Toggle theme"
+        class="relative rounded-lg p-2.5 cursor-pointer transition-colors duration-300 overflow-hidden"
+      >
+        <!-- Sun icon (shown in dark mode to switch to light) -->
+        <span
+          id="theme-icon-sun"
+          class="theme-icon absolute inset-0 flex items-center justify-center transition-all duration-300"
+        >
+          <SunIcon class="size-5 text-orange-400 fill-orange-400" />
+        </span>
+        <!-- Moon icon (shown in light mode to switch to dark) -->
+        <span
+          id="theme-icon-moon"
+          class="theme-icon absolute inset-0 flex items-center justify-center transition-all duration-300"
+        >
+          <MoonIcon class="size-5 text-purple-500 fill-purple-500" />
+        </span>
+        <!-- Invisible spacer to maintain button size -->
+        <span class="size-5 opacity-0 block"></span>
       </button>
     </div>
   </div>
 </header>
+
+<style>
+  .theme-icon {
+    opacity: 0;
+    transform: scale(0.5) rotate(-90deg);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+  .theme-icon.visible {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  /* Hover glow effect depending on current mode */
+  html.light #theme-toggle:hover {
+    background-color: rgb(168 85 247 / 0.1);
+  }
+  html.dark #theme-toggle:hover {
+    background-color: rgb(251 146 60 / 0.1);
+  }
+</style>
+
+<script>
+  function initThemeToggle() {
+    const toggle = document.getElementById("theme-toggle");
+    const sunIcon = document.getElementById("theme-icon-sun")!;
+    const moonIcon = document.getElementById("theme-icon-moon")!;
+
+    if (!toggle || !sunIcon || !moonIcon) return;
+
+    function applyTheme(theme: string) {
+      const html = document.documentElement;
+      html.classList.remove("light", "dark");
+      html.classList.add(theme);
+      localStorage.setItem("theme", theme);
+
+      if (theme === "dark") {
+        // Dark mode: show sun (to switch back to light)
+        sunIcon.classList.add("visible");
+        moonIcon.classList.remove("visible");
+      } else {
+        // Light mode: show moon (to switch to dark)
+        moonIcon.classList.add("visible");
+        sunIcon.classList.remove("visible");
+      }
+    }
+
+    // Initialize icon state from current html class
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    applyTheme(currentTheme);
+
+    toggle.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      applyTheme(isDark ? "light" : "dark");
+    });
+  }
+
+  // Run on initial load
+  initThemeToggle();
+
+  // Re-run after Astro view transitions
+  document.addEventListener("astro:after-swap", initThemeToggle);
+</script>
